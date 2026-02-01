@@ -12,8 +12,18 @@ class SocketService {
         if (!this.instance) {
             console.log("🔌 Initializing Socket Singleton...");
 
-            this.instance = io("http://127.0.0.1:3001", {
-                transports: ["polling", "websocket"], // Polling önce gelir, bağlantı garantiye alınır, sonra upgrade olur.
+            // DEĞİŞİKLİK: 1) Hard-coded URL yerine ENV kullanımı
+            // DEĞİŞİKLİK: 2) Production/Local ayrımı ENV ile yapılıyor
+            const SOCKET_URL = import.meta.env.VITE_BACKEND_URL;
+
+            console.log("🔌 Connecting to Socket URL:", SOCKET_URL);
+
+            if (!SOCKET_URL) {
+                console.error("❌ VITE_BACKEND_URL environment variable is missing!");
+            }
+
+            this.instance = io(SOCKET_URL, {
+                transports: ["websocket"], // DEĞİŞİKLİK: 5) Sadece websocket
                 autoConnect: true,
                 reconnection: true,
                 reconnectionAttempts: 10,

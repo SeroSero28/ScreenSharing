@@ -3,7 +3,7 @@ import type { Socket } from 'socket.io-client';
 
 export const useTypingIndicator = (socket: Socket) => {
     const [typingUsers, setTypingUsers] = useState<string[]>([]);
-    const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+    const typingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const isTypingRef = useRef(false);
 
     useEffect(() => {

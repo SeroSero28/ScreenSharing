@@ -5,7 +5,7 @@ export const useTyping = (socket: Socket) => {
     // Stores Set of userIds who are currently typing
     const [typingUsers, setTypingUsers] = useState<Set<string>>(new Set());
     const isTypingRef = useRef(false);
-    const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+    const typingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     useEffect(() => {
         if (!socket) return;

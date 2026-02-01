@@ -1,6 +1,6 @@
 // src/App.tsx
 import React, { useState, useEffect, useCallback } from 'react';
-import { Container, Form, Button, FormControl } from 'react-bootstrap';
+import { Container, Form, Button } from 'react-bootstrap';
 import { socket } from './socket';
 import ScreenViewer from './components/ScreenViewer';
 import Chat from './components/Chat';
@@ -10,8 +10,6 @@ import { FaMicrophone, FaMicrophoneSlash, FaHeadphones, FaVolumeMute } from 'rea
 import './App.css';
 import { useParticipants } from './hooks/useParticipants';
 import ParticipantsPanel from './components/ParticipantsPanel';
-
-type User = { userId: string; username: string };
 
 function App() {
   const [username, setUsername] = useState('');
@@ -104,7 +102,17 @@ function App() {
     };
 
     const onChatMessage = (msg: any) => {
-      setMessages(prev => [...prev, { ...msg, type: 'text', timestamp: msg.timestamp || new Date().toISOString() }]);
+      // DEĞİŞİKLİK: 5) Double message problemini önleme (Deduplication)
+      setMessages(prev => {
+        const isDuplicate = prev.some(m =>
+          m.username === msg.username &&
+          m.text === msg.text &&
+          m.timestamp === msg.timestamp
+        );
+        if (isDuplicate) return prev;
+
+        return [...prev, { ...msg, type: 'text', timestamp: msg.timestamp || new Date().toISOString() }];
+      });
     };
 
     const onFileShare = (file: any) => {

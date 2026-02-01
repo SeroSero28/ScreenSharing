@@ -1,5 +1,5 @@
-// src/components/Chat.tsx
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
+import type { FC, FormEvent, DragEvent, ChangeEvent } from 'react';
 import { Form, Button, FormControl } from 'react-bootstrap';
 import { Socket } from 'socket.io-client';
 import { useFileShare, type FileMessage } from '../hooks/useFileShare';
@@ -28,7 +28,7 @@ interface TextMessage {
 
 type Message = TextMessage | FileMessage;
 
-const Chat: React.FC<ChatProps> = ({ socket, room, username, messages, users, onNewMessage }) => {
+const Chat: FC<ChatProps> = ({ socket, room, username, messages, users, onNewMessage }) => {
   const [currentMessage, setCurrentMessage] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [isDragOver, setIsDragOver] = useState(false);
@@ -49,7 +49,7 @@ const Chat: React.FC<ChatProps> = ({ socket, room, username, messages, users, on
 
   useEffect(scrollToBottom, [messages, typingUsers]); // Scroll when typing changes too
 
-  const sendMessage = (e: React.FormEvent) => {
+  const sendMessage = (e: FormEvent) => {
     e.preventDefault();
     if (currentMessage.trim()) {
       const messageData = { room, username, text: currentMessage };
@@ -61,7 +61,7 @@ const Chat: React.FC<ChatProps> = ({ socket, room, username, messages, users, on
   };
 
   // Drag & Drop Handlers
-  const handleDragOver = (e: React.DragEvent) => {
+  const handleDragOver = (e: DragEvent) => {
     e.preventDefault();
     setIsDragOver(true);
   };
@@ -70,7 +70,7 @@ const Chat: React.FC<ChatProps> = ({ socket, room, username, messages, users, on
     setIsDragOver(false);
   };
 
-  const handleDrop = (e: React.DragEvent) => {
+  const handleDrop = (e: DragEvent) => {
     e.preventDefault();
     setIsDragOver(false);
 
@@ -125,7 +125,7 @@ const Chat: React.FC<ChatProps> = ({ socket, room, username, messages, users, on
     return null;
   };
 
-  const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileInput = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       uploadFile(e.target.files[0]);
     }

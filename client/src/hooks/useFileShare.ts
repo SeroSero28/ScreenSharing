@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { Socket } from 'socket.io-client';
 
 export interface FileMessage {
