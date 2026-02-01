@@ -1,0 +1,87 @@
+.icon-btn {
+  font-size: 1.2rem; /* Adjust icon size */
+  cursor: pointer;
+  color: #fff; /* Default color */
+  transition: color 0.2s ease-in-out, text-shadow 0.2s ease-in-out;
+  padding: 0.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-btn:hover {
+  color: #a0a0a0; /* Slightly dim on hover */
+}
+
+/* Muted/Deafened state */
+.icon-btn.muted {
+  color: #dc3545; /* Red for muted */
+}
+
+/* Speaking glow effect for microphone */
+.icon-btn.speaking {
+  color: #28a745; /* Greenish for speaking */
+  text-shadow: 0 0 8px rgba(40, 167, 69, 0.7); /* Glow effect */
+}
+
+/* Specific styling for microphone and headphones icons */
+.icon-btn svg {
+  vertical-align: middle;
+}
+
+/* Styles for the new Screen-sharing thumbnail gallery */
+.thumbnail-gallery-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+.thumbnail {
+    position: relative;
+    display: inline-block;
+    width: 200px;
+    height: 120px;
+    background-color: #1a1a1a;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: border-color 0.2s ease;
+}
+
+.thumbnail:hover {
+    border-color: #8b5cf6; /* A nice purple accent */
+}
+
+.thumbnail video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.thumbnail-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    font-size: 0.8rem;
+    padding: 4px 8px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Make the screen share button bar transparent */
+.screen-share-bar {
+    background-color: transparent !important;
+    padding: 0 !important;
+    padding-top: 8px !important; /* Move button slightly down */
+}

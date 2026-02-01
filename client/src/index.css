@@ -1,0 +1,158 @@
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Color Palette - Premium Dark & Neon */
+  --bg-dark: #0f0f13;
+  --bg-card: #18181b;
+  --bg-input: #232328;
+
+  --primary-color: #8b5cf6;
+  /* Modern Purple */
+  --primary-hover: #7c3aed;
+  --accent-color: #ec4899;
+  /* Neon Pink */
+
+  --text-main: #ffffff;
+  --text-muted: #d4d4d8;
+  /* Lightened from #a1a1aa for better contrast */
+
+  --border-color: #27272a;
+
+  /* Glassmorphism */
+  --glass-bg: rgba(24, 24, 27, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
+  /* Transitions */
+  --transition-speed: 0.3s;
+}
+
+/* ZORUNLU: Global Hard Reset */
+html,
+body,
+#root {
+  height: 100%;
+  min-height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-dark);
+  overflow-x: hidden;
+  /* Sadece yatay scroll'u engelle, dikey gerekirse olsun */
+}
+
+/* ZORUNLU: Viewport Merkezleme Wrapper */
+.app-root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  /* Fallback */
+  min-height: 100dvh;
+  /* Dynamic Viewport Height - Mobile Friendly */
+  width: 100%;
+  background-color: var(--bg-dark);
+}
+
+.login-card {
+  /* Kartın kendi içinde düzeni - Gelecek özelleştirmeler için placeholder */
+  display: block;
+}
+
+.login-card .form-label {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+/* Bootstrap Container Reset (Varsayılan padding'i ezmek için) */
+.container-fluid {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin: 0 !important;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3f3f46;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #52525b;
+}
+
+/* Global Utility Classes */
+.text-gradient {
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: 16px;
+}
+
+.btn-primary-custom {
+  background: linear-gradient(135deg, var(--primary-color), #6d28d9);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: all var(--transition-speed) ease;
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+}
+
+.btn-primary-custom:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
+  background: linear-gradient(135deg, #7c3aed, #5b21b6);
+}
+
+/* Overriding Bootstrap defaults */
+.text-muted {
+  color: var(--text-muted) !important;
+}
+
+.form-control {
+  background-color: var(--bg-input) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-main) !important;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.form-control::placeholder {
+  color: #a1a1aa !important;
+  /* Lighter gray for placeholders */
+  opacity: 1;
+}
+
+.form-control:focus {
+  background-color: var(--bg-input) !important;
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.3) !important;
+  border-color: var(--primary-color) !important;
+  color: var(--text-main) !important;
+}
+
+.card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  border-radius: 16px;
+}
