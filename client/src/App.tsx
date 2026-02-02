@@ -203,7 +203,8 @@ function App() {
     return (
       <div className="app-root">
         <div className="login-card p-5 rounded shadow-lg" style={{ background: '#1e1e1e', maxWidth: '400px', width: '100%' }}>
-          <h2 className="text-center mb-4 fw-bold text-gradient">Screen Sharing</h2>
+          <h2 className="text-center mb-1 fw-bold text-gradient">Screen Sharing</h2>
+          <p className="text-center text-muted mb-4" style={{ fontSize: '0.9rem', opacity: 0.8, letterSpacing: '0.5px' }}>When you need!!!</p>
           <Form onSubmit={handleJoinRoom}>
             <Form.Group className="mb-3">
               <Form.Label>Kullanıcı Adı</Form.Label>
