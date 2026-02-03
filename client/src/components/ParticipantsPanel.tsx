@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaMicrophone, FaMicrophoneSlash, FaDesktop, FaUser } from 'react-icons/fa';
+import { FaMicrophone, FaMicrophoneSlash, FaDesktop, FaUser, FaHeadphones, FaVolumeMute } from 'react-icons/fa';
 import type { Participant } from '../hooks/useParticipants';
 
 interface ParticipantsPanelProps {
@@ -58,11 +58,19 @@ const ParticipantsPanel: React.FC<ParticipantsPanelProps> = ({ participants, cur
                                 </div>
                             </div>
 
-                            <div className="text-muted">
-                                {user.isMuted ? (
-                                    <FaMicrophoneSlash className="text-danger" />
+                            <div className="text-muted d-flex gap-2">
+                                {/* Speaker/Headphone Status */}
+                                {user.isDeafened ? (
+                                    <FaVolumeMute className="text-danger" title="Sesi Kapalı" />
                                 ) : (
-                                    <FaMicrophone className={isSpeaking ? "text-success pulse-animation" : "text-secondary"} />
+                                    <FaHeadphones className="text-secondary" title="Sesi Açık" />
+                                )}
+
+                                {/* Microphone Status */}
+                                {user.isMuted ? (
+                                    <FaMicrophoneSlash className="text-danger" title="Mikrofon Kapalı" />
+                                ) : (
+                                    <FaMicrophone className={isSpeaking ? "text-success pulse-animation" : "text-secondary"} title="Mikrofon Açık" />
                                 )}
                             </div>
                         </div>

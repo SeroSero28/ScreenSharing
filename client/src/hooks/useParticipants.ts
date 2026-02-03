@@ -7,6 +7,7 @@ export interface Participant {
     isMuted: boolean;
     isSpeaking: boolean;
     isPresenter: boolean;
+    isDeafened: boolean;
 }
 
 export const useParticipants = (socket: Socket) => {
@@ -34,6 +35,12 @@ export const useParticipants = (socket: Socket) => {
         socket.emit(isMuted ? 'mic-muted' : 'mic-unmuted');
     }, [socket]);
 
+    // Explicit Speaker Wrappers (Deafen)
+    const setDeafened = useCallback((isDeafened: boolean) => {
+        if (!socket) return;
+        socket.emit(isDeafened ? 'speaker-muted' : 'speaker-unmuted');
+    }, [socket]);
+
     // Explicit Speaking Wrappers
     const setSpeaking = useCallback((isSpeaking: boolean) => {
         if (!socket) return;
@@ -49,6 +56,7 @@ export const useParticipants = (socket: Socket) => {
     return {
         participants,
         setMute,
+        setDeafened,
         setSpeaking,
         setPresenter
     };

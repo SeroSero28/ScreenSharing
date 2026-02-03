@@ -33,7 +33,7 @@ function App() {
   const [messages, setMessages] = useState<any[]>([]);
 
   // Hook Integration (Single Source of Truth)
-  const { participants, setMute, setSpeaking } = useParticipants(socket);
+  const { participants, setMute, setSpeaking, setDeafened } = useParticipants(socket);
 
   // Sync participants to legacy 'users' map
   useEffect(() => {
@@ -48,6 +48,10 @@ function App() {
   useEffect(() => {
     setMute(isMuted);
   }, [isMuted, setMute]);
+
+  useEffect(() => {
+    setDeafened(isDeafened);
+  }, [isDeafened, setDeafened]);
 
   useEffect(() => {
     setSpeaking(isSelfSpeaking);

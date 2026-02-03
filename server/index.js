@@ -69,7 +69,8 @@ io.on('connection', (socket) => {
       username: username,
       isMuted: false,     // Varsayılan
       isSpeaking: false,  // Varsayılan
-      isPresenter: false  // Varsayılan
+      isPresenter: false, // Varsayılan
+      isDeafened: false   // Varsayılan (Yeni)
     };
 
     // 1. Chat History
@@ -104,6 +105,22 @@ io.on('connection', (socket) => {
       rooms[userCurrentRoom].participants[socket.id].isMuted = false;
       broadcastParticipants(userCurrentRoom);
       socket.to(userCurrentRoom).emit('mic-unmuted', { id: socket.id });
+    }
+  });
+
+  socket.on('speaker-muted', () => {
+    if (userCurrentRoom && rooms[userCurrentRoom]?.participants[socket.id]) {
+      rooms[userCurrentRoom].participants[socket.id].isDeafened = true;
+      broadcastParticipants(userCurrentRoom);
+      socket.to(userCurrentRoom).emit('speaker-muted', { id: socket.id });
+    }
+  });
+
+  socket.on('speaker-unmuted', () => {
+    if (userCurrentRoom && rooms[userCurrentRoom]?.participants[socket.id]) {
+      rooms[userCurrentRoom].participants[socket.id].isDeafened = false;
+      broadcastParticipants(userCurrentRoom);
+      socket.to(userCurrentRoom).emit('speaker-unmuted', { id: socket.id });
     }
   });
 
